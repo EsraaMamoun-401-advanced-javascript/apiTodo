@@ -26,8 +26,8 @@ function getModel(req, res, next) {
 
 router.param('model', getModel);
 
-router.get('/:model', permissions('read'), getAllFunction);
-router.get('/:model/:id', permissions('read'), getOneFunction);
+router.get('/:model', getAllFunction);
+router.get('/:model/:id', getOneFunction);
 router.post('/:model', permissions('read'), postFunction);
 router.put('/:model/:id', bearerMiddleware, permissions('update'), putFunction);
 router.delete('/:model/:id', bearerMiddleware, permissions('delete'), deleteFunction);
