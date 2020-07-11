@@ -19,6 +19,11 @@ const Users = require('./auth-server/users');
 const basicAuth = require('./auth-server/basic-auth-middleware');
 
 app.use(express.static('./public'));
+
+app.get('/', (req, res) => {
+  res.status(200).send('Welcome!!');
+});
+
 app.post('/signup', (req, res, next) => {
   let user = req.body;
   let users = new Users(user);
