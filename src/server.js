@@ -24,14 +24,22 @@ app.get('/', (req, res) => {
   res.status(200).send('Welcome!!');
 });
 
+let roles = {
+  user: ['read'],
+  writer: ['read', 'update'],
+  editor: ['read', 'update', 'create'],
+  admin: ['read', 'update', 'create', 'delete'],
+};
+
 app.post('/signup', (req, res, next) => {
   let user = req.body;
   let users = new Users(user);
   users.save()
     .then(result => {
+      let uerRoles = roles[result.role];
       let token = users.generateToken(result);
       res.cookie('token', token, { expires: new Date(Date.now() + 12000000), httpOnly: false });
-      res.status(200).json({ userData: result, token });
+      res.status(200).json({ userData: result, token, uerRoles });
     }).catch(error => {
       console.error(`Error: invalid signup username is taken`);
       res.status(403).send('invalid signup username is taken');
@@ -40,9 +48,11 @@ app.post('/signup', (req, res, next) => {
 
 app.post('/signin', basicAuth, (req, res) => {
   let token = req.token;
+  let uerRoles = roles[req.user.role];
+  console.log('uerRoles===', uerRoles);
   res.cookie('token', token, { expires: new Date(Date.now() + 12000000), httpOnly: false });
 
-  res.status(201).send({ token, userData: req.user });
+  res.status(201).send({ token, userData: req.user, uerRoles });
 });
 
 app.get('/users', (req, res) => {
