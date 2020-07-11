@@ -39,7 +39,7 @@ app.post('/signup', (req, res, next) => {
       let uerRoles = roles[result.role];
       let token = users.generateToken(result);
       res.cookie('token', token, { expires: new Date(Date.now() + 12000000), httpOnly: false });
-      res.status(200).json({ userData: result, token, uerRoles });
+      res.status(200).json({ token,user: result, capabilities: uerRoles });
     }).catch(error => {
       console.error(`Error: invalid signup username is taken`);
       res.status(403).send('invalid signup username is taken');
@@ -52,7 +52,7 @@ app.post('/signin', basicAuth, (req, res) => {
   console.log('uerRoles===', uerRoles);
   res.cookie('token', token, { expires: new Date(Date.now() + 12000000), httpOnly: false });
 
-  res.status(201).send({ token, userData: req.user, uerRoles });
+  res.status(201).send({ token, user: req.user, capabilities: uerRoles });
 });
 
 app.get('/users', (req, res) => {
