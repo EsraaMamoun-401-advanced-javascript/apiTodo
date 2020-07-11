@@ -1,0 +1,31 @@
+{
+  "name": "apitodo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EsraaMamoun-401-advanced-javascript/apiTodo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EsraaMamoun-401-advanced-javascript/apiTodo/issues"
+  },
+  "homepage": "https://github.com/EsraaMamoun-401-advanced-javascript/apiTodo#readme",
+  "dependencies": {
+    "base-64": "^0.1.0",
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.21",
+    "morgan": "^1.10.0"
+  }
+}
