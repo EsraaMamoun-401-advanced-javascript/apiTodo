@@ -5,9 +5,9 @@ const router = express.Router();
 
 const todo = require('./todo-collection');
 
-const bearerMiddleware = require('../auth-server/bearer-auth');
+// const bearerMiddleware = require('../auth-server/bearer-auth');
 
-const permissions = require('../auth-server/acl-middleware');
+// const permissions = require('../auth-server/acl-middleware');
 
 function getModel(req, res, next) {
 
@@ -28,9 +28,9 @@ router.param('model', getModel);
 
 router.get('/:model', getAllFunction);
 router.get('/:model/:id', getOneFunction);
-router.post('/:model', permissions('read'), postFunction);
-router.put('/:model/:id', bearerMiddleware, permissions('update'), putFunction);
-router.delete('/:model/:id', bearerMiddleware, permissions('delete'), deleteFunction);
+router.post('/:model', postFunction);
+router.put('/:model/:id', putFunction);
+router.delete('/:model/:id', deleteFunction);
 
 function getAllFunction(req, res, next) {
   req.model.get()
