@@ -52,7 +52,7 @@ app.post('/signin', basicAuth, (req, res) => {
   console.log('uerRoles===', uerRoles);
   res.cookie('token', token, { expires: new Date(Date.now() + 12000000), httpOnly: false });
 
-  res.status(201).send({ token, user: req.user, capabilities: uerRoles });
+  res.status(201).send({ token, user: req.user, roles: uerRoles });
 });
 
 app.get('/users', (req, res) => {
